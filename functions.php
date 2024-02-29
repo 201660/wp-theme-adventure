@@ -658,6 +658,11 @@ array(
 	'slug'      => 'gpt3-ai-content-generator',
 	'required'  => false,
 ),
+array(
+	'name'      => 'Text To Speech TTS Accessibility',
+	'slug'      => 'text-to-audio',
+	'required'  => true,
+),
 	);
 
 	/*
