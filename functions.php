@@ -661,7 +661,12 @@ array(
 array(
 	'name'      => 'Text To Speech TTS Accessibility',
 	'slug'      => 'text-to-audio',
-	'required'  => true,
+	'required'  => false,
+),
+array(
+	'name'      => 'MP3 Audio Player for Music, Radio & Podcast by Sonaar',
+	'slug'      => 'mp3-music-player-by-sonaar',
+	'required'  => false,
 ),
 	);
 
