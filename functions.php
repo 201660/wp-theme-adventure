@@ -766,3 +766,11 @@ array(
 
 	tgmpa( $plugins, $config );
 }
+
+function my_default_page_template( $page_template ) {
+    if ( is_page() ) {
+        $page_template = dirname( __FILE__ ) . '/page-nosidebar.php'; 
+    }
+    return $page_template;
+}
+add_filter( 'page_template', 'my_default_page_template' );
