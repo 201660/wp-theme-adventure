@@ -668,6 +668,11 @@ array(
 	'slug'      => 'mp3-music-player-by-sonaar',
 	'required'  => false,
 ),
+array(
+	'name'      => 'WooCommerce',
+	'slug'      => 'woocommerce',
+	'required'  => true,
+),
 	);
 
 	/*
@@ -779,3 +784,36 @@ function my_default_page_template( $page_template ) {
     return $page_template;
 }
 add_filter( 'page_template', 'my_default_page_template' );
+
+function product_in_cart_shortcode( $atts, $content = null ) {
+    // Extract shortcode attributes, ensuring 'id' is present
+    $atts = shortcode_atts( array(
+        'id' => ''
+    ), $atts );
+
+    // Abort if no product ID is provided
+    if ( empty( $atts['id'] ) ) {
+        return ''; // Return an empty string if the ID is missing
+    }
+
+    $product_id = intval( $atts['id'] ); // Sanitize the product ID for security
+
+    // Check if the product is in the cart
+    $product_in_cart = false;
+    foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+        if ( $cart_item['product_id'] === $product_id ) {
+            $product_in_cart = true;
+            break;
+        }
+    }
+
+    // Display content if the product is in the cart, otherwise return an empty string
+    if ( $product_in_cart ) {
+        return do_shortcode( $content ); // Process any nested shortcodes within the content
+    } else {
+        return ''; 
+    }
+}
+
+// Register the shortcode
+add_shortcode( 'product_in_cart', 'product_in_cart_shortcode' );
