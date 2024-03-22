@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Hero Banner
+Template Name: Page (Hero Banner)
 */
 get_header(); 
 add_image_size( 'hero-banner-image', 1920, 700, true ); // Adjust width and height as needed
