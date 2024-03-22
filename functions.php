@@ -822,36 +822,3 @@ function product_in_cart_shortcode( $atts, $content = null ) {
 
 // Register the shortcode
 add_shortcode( 'product_in_cart', 'product_in_cart_shortcode' );
-
-function product_not_in_cart_shortcode( $atts, $content = null ) {
-    // Extract shortcode attributes
-    $atts = shortcode_atts( array(
-        'id' => ''
-    ), $atts );
-
-    // Abort if no product ID is provided
-    if ( empty( $atts['id'] ) ) {
-        return ''; 
-    }
-
-    $product_id = intval( $atts['id'] ); 
-
-    // Check if the product is in the cart
-    $product_in_cart = false;
-    foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
-        if ( $cart_item['product_id'] === $product_id ) {
-            $product_in_cart = true;
-            break;
-        }
-    }
-
-    // Display content only if the product is NOT in the cart
-    if ( ! $product_in_cart ) { 
-        return do_shortcode( $content ); 
-    } else {
-        return ''; 
-    }
-}
-
-// Register the shortcode
-add_shortcode( 'product_not_in_cart', 'product_not_in_cart_shortcode' );
