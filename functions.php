@@ -789,3 +789,37 @@ function my_default_page_template( $page_template ) {
     return $page_template;
 }
 add_filter( 'page_template', 'my_default_page_template' );
+
+add_shortcode( 'show_if_in_cart', 'show_content_if_in_cart' );
+
+function show_content_if_in_cart( $atts, $content = null ) {
+  // Shortcode attributes
+  $atts = shortcode_atts( array(
+    'product_id' => null,
+  ), $atts );
+
+  // Extract product ID
+  $product_id = $atts['product_id'];
+
+  // Check if product ID is provided
+  if ( ! $product_id ) {
+    return 'Please specify a product ID for the shortcode.';
+  }
+
+  // Check if WooCommerce is active
+  if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    return 'WooCommerce is not active.';
+  }
+
+  // Check if product is in cart
+  $found = false;
+  foreach ( WC()->cart->get_cart() as $cart_item ) {
+    if ( $cart_item['product_id'] == $product_id || $cart_item['variation_id'] == $product_id ) {
+      $found = true;
+      break;
+    }
+  }
+
+  // Display content only if product is found
+  return $found ? do_shortcode( $content ) : '';
+}
