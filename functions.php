@@ -673,11 +673,6 @@ array(
 	'slug'      => 'woocommerce',
 	'required'  => true,
 ),
-array(
-	'name'      => 'Woody Snippets',
-	'slug'      => 'insert-php',
-	'required'  => false,
-),
 	);
 
 	/*
