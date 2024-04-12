@@ -558,10 +558,6 @@ function wp_theme_adventure_scripts_loader() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'wp_theme_adventure_scripts_loader' );
-function add_aframe_script() {
-    wp_enqueue_script( 'aframe', 'https://aframe.io/releases/1.5.0/aframe.min.js', array(), '1.5.0', true );
-}
-add_action( 'wp_enqueue_scripts', 'add_aframe_script' );
 
 /**
  * Include the TGM_Plugin_Activation class.
